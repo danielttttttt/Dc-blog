@@ -6,53 +6,46 @@ document.getElementById('commentForm').addEventListener('submit', function(e) {
   const email = document.getElementById('email').value;
   const commentText = document.getElementById('comment').value;
 
-  // Create comment object
-  const newComment = {
-    name,
-    email,
-    text: commentText,
-    timestamp: new Date().toLocaleString()
-  };
+  const comment = `
+    <div class="comment">
+      <div class="comment-author">
+        <h4>${name}</h4>
+        <p>${email}</p>
+      </div>
+      <p>${commentText}</p>
+    </div>
+  `;
 
-  // Get existing comments from localStorage or initialize empty array
-  let comments = JSON.parse(localStorage.getItem('comments')) || [];
+  document.querySelector('.comments-list').insertAdjacentHTML('beforeend', comment);
 
-  // Add new comment to the array
-  comments.push(newComment);
-
-  // Save updated comments to localStorage
-  localStorage.setItem('comments', JSON.stringify(comments));
-
-  // Display comment
-  displayComment(newComment);
-
-  // Clear form fields
   document.getElementById('name').value = '';
   document.getElementById('email').value = '';
   document.getElementById('comment').value = '';
 });
 
-// Load and display saved comments on page load
-window.addEventListener('load', function() {
-  const savedComments = JSON.parse(localStorage.getItem('comments'));
-  if (savedComments) {
-    savedComments.forEach(comment => {
-      displayComment(comment);
-    });
-  }
-});
+// Fetch Blog Posts
+async function fetchPosts() {
+  const container = document.getElementById('posts-container');
 
-// Helper function to create and append comment HTML
-function displayComment(comment) {
-  const commentHTML = `
-    <div class="comment">
-      <div class="comment-author">
-        <h4>${comment.name}</h4>
-        <p>${comment.email}</p>
-      </div>
-      <p>${comment.text}</p>
-      <small>${comment.timestamp}</small>
-    </div>
-  `;
-  document.querySelector('.comments-list').insertAdjacentHTML('beforeend', commentHTML);
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts ');
+    const posts = await response.json();
+
+    // Display first 5 posts
+    posts.slice(0, 5).forEach(post => {
+      const postHTML = `
+        <div class="post">
+          <h3>${post.title}</h3>
+          <p>${post.body}</p>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', postHTML);
+    });
+  } catch (error) {
+    container.innerHTML = `<p class="error">Failed to load posts. Please try again later.</p>`;
+    console.error('Error fetching posts:', error);
+  }
 }
+
+// Run on Page Load
+fetchPosts();
