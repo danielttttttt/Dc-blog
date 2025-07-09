@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DC Universe</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Title & Image Section -->
+    <header class="header-section">
+      <h1 id="top">DC Universe: The Legacy of Superheroes</h1>
+      <img src="batman.jpg" alt="Batman standing heroically in Gotham City skyline" />
+    </header>
+
+    <!-- Blog Content Section -->
+    <article class="blog-content">
+      <p>Since the debut of Superman in 1938, DC Comics has been at the forefront of the superhero genre, creating some of the most iconic characters in pop culture history. From the dark streets of Gotham to the futuristic Metropolis, the DC Universe continues to captivate audiences worldwide.</p>
+    </article>
+
+    <!-- Author Info Section -->
+    <section class="author-info">
+      <img src="ClarkKent.jpg" alt="Clark Kent - Senior Reporter at Daily Planet" class="avatar" />
+      <div class="bio">
+        <h3>Clark Kent</h3>
+        <p>Senior Reporter at Daily Planet, covering superheroes and their impact on our world since 1938.</p>
+      </div>
+    </section>
+
+    <!-- Comment Section -->
+    <section class="comment-section">
+      <h2>Join the Discussion</h2>
+      <p>Share your thoughts on the Dark Knight's legacy in the DC Universe.</p>
+
+      <div class="comments-list"></div>
+
+      <form id="commentForm" action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="your name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="comment">Your Comment:</label>
+          <textarea id="comment" name="comment" rows="5" placeholder="Add your thoughts here..." required></textarea>
+        </div>
+        <button type="submit">Submit Comment</button>
+      </form>
+    </section>
+
+    <!-- Fetched Posts Section -->
+    <section class="fetched-posts">
+      <h2>Latest Blog Posts</h2>
+      <div id="posts-container"></div>
+    </section>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
